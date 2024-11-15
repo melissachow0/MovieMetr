@@ -2,7 +2,6 @@ import Link from "next/link";
 import styles from "./MovieDetailPage.module.css";
 import Image from "next/image";
 import { useState } from "react";
-import notfound from "@/_assets/NOTFOUND.png";
 import { MovieData } from "@/_api/types"; // Adjust the import path accordingly
 import AddMovieToListModal from "../UserLists/UserLists";
 
@@ -57,7 +56,7 @@ export default function MovieDetailPage({
             src={
               data.poster_path
                 ? `https://image.tmdb.org/t/p/original${data.poster_path}`
-                : notfound
+                : "/_assets/NOTFOUND.png"
             }
             width={255}
             height={382.5}

@@ -2,23 +2,23 @@
 export const mockplayingData = [
   {
     id: 1,
-    image: "/Users/melissachow/CSC 484/MovieMetr_UI/frontend/app/_assets/films/popularfilms/arcadian.jpg",
-    title: "Arcadian",
+    image: "despicableme4.jpg",
+    title: "Despicable Me 4",
     backdrop_path: "@/_assets/films/popularfilms/arcadian.jpg",
     summary: "Summary of Now Playing Movie 1",
   },
   {
     id: 2,
-    image: "/Users/melissachow/CSC 484/MovieMetr_UI/frontend/app/_assets/films/popularfilms/arcadian.jpg",
+    image: "deadpoolandwolverine.jpg",
     backdrop_path: "@/_assets/films/popularfilms/arcadian.jpg",
     title: "Deadpool and Wolverine",
     summary: "Summary of Now Playing Movie 1",
   },
   {
     id: 3,
-    image: "/Users/melissachow/CSC 484/MovieMetr_UI/frontend/app/_assets/films/popularfilms/arcadian.jpg",
+    image: "gladiator2.jpg",
     backdrop_path: "@/_assets/films/popularfilms/arcadian.jpg",
-    title: "Despicable Me 4",
+    title: "Gladiator II",
     summary: "Summary of Now Playing Movie 1",
   },
   // Add more "Now Playing" movies here

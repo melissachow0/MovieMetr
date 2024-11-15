@@ -7,6 +7,7 @@ import Image from "next/image";
 import { mockplayingData } from "@/_api/mockdata";
 //import { getTopRated } from "@/_api/gettopratedmovies";
 import "./homepage.css";
+import Logo from "@/_assets/logo2.png";
 
 interface Movie {
   image: string;
@@ -32,10 +33,10 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
     <Link href={`/films/${id}`}>
       <Image
         className="movie-list-item-img"
-        src={"/_assets/films/popularfilms/arcadian.jpg"} // Prepend '/' if using a relative path
+        src={`/_assets/films/popularfilms/${image}`} // Adjust path based on your folder structure within `public`
         alt={title}
-        width={150}
-        height={225}
+        width={14}
+        height={33}
       />
     </Link>
     <div className="movie-list-item-title">{title}</div>
