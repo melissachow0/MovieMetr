@@ -1,6 +1,5 @@
 import styles from "./SearchResult.module.css";
 import Image from "next/image";
-import notfound from "@/_assets/NOTFOUND.png";
 import Link from "next/link";
 
 export default function SearchResult({
@@ -34,7 +33,7 @@ export default function SearchResult({
           src={
             data.image
               ? `https://image.tmdb.org/t/p/original${data.image}`
-              : notfound
+              : "_assets/NOTFOUND.png"
           }
           width={100.8}
           height={144}
