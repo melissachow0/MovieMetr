@@ -294,3 +294,16 @@
     align-items: center;
   }
 }
+
+.closeButton {
+  margin-left: 50%;
+  border-radius: 15px;
+  border : none;
+  font-size: 24px;
+  cursor: pointer;
+  transform: translate(-50%, 0); /* Optional centering adjustment */
+}
+
+.closeButton:hover {
+  color: #0070f3; /* Highlight effect on hover */
+}

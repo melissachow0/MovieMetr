@@ -7,6 +7,7 @@ import { Tabs, Tab, Box } from "@mui/material";
 import { SpeedDial, SpeedDialIcon, SpeedDialAction } from "@mui/material";
 import profilePic from "../../public/_assets/sample_profile_pic.png"
 import bannerPic from "../../public/_assets/sample_banner_pic.jpg"
+import Review from "@/_ui/components/Review/Review"
 
 import EditProfileModal from "@/_ui/components/EditProfile/EditProfile";
 import { getUserLists, getMovieInfo, addList, deleteList } from "@/_api/lists";
@@ -48,9 +49,13 @@ interface MovieList {
 }
 
 function CustomTabPanel(props: TabPanelProps) {
+  
+
   const { children, value, index, ...other } = props;
 
   return (
+  
+
     <div
       role="tabpanel"
       hidden={value !== index}
@@ -84,6 +89,8 @@ const Userpage = () => {
   const [newListName, setNewListName] = useState("");
   const [isListEditing, setIsListEditing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -144,6 +151,14 @@ const Userpage = () => {
       fetchUser(user._id);
       fetchUserListsData(user._id);
     }
+  };
+
+  const openReviewModal = () => {
+    setIsReviewModalOpen(true);
+  };
+  
+  const closeReviewModal = () => {
+    setIsReviewModalOpen(false);
   };
 
   const fetchUserListsData = async (userId: string) => {
@@ -212,6 +227,7 @@ const Userpage = () => {
   };
 
   return (
+    
     <div className={styles.userPage}>
       <div className={styles.banner}>
         <Image
@@ -254,9 +270,17 @@ const Userpage = () => {
             >
               Edit Profile
             </button>
-            <button className={styles.shareProfile} type="submit">
+            <button className={styles.shareProfile} type="submit" style={{marginLeft : 10}}> 
               Share Profile
             </button>
+            <button
+              className={styles.shareProfile}
+              style={{ marginLeft: 10 }}
+              onClick={openReviewModal}
+            >
+              Create Review
+            </button>
+            
           </div>
           {isEditProfileOpen && (
             <EditProfileModal
@@ -390,6 +414,19 @@ const Userpage = () => {
             </div>
           ))}
         </div>
+        {isReviewModalOpen && (
+            <div className={styles.modalOverlay}>
+              <div className={styles.modalContent}>
+                <button
+                  className={styles.closeButton}
+                  onClick={closeReviewModal}
+                >
+                  ×
+                </button>
+                <Review />
+              </div>
+            </div>
+          )}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}></CustomTabPanel>
       <CustomTabPanel value={value} index={2}></CustomTabPanel>
