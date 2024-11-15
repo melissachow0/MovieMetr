@@ -7,7 +7,8 @@ import { Tabs, Tab, Box } from "@mui/material";
 import { SpeedDial, SpeedDialIcon, SpeedDialAction } from "@mui/material";
 import profilePic from "../../public/_assets/sample_profile_pic.png"
 import bannerPic from "../../public/_assets/sample_banner_pic.jpg"
-import Review from "@/_ui/components/Review/Review"
+import Review from "@/_ui/components/Review/Review";
+import { MovieLists } from "@/_api/mockdata";
 
 import EditProfileModal from "@/_ui/components/EditProfile/EditProfile";
 import { getUserLists, getMovieInfo, addList, deleteList } from "@/_api/lists";
@@ -17,8 +18,6 @@ import {
   updateProfilePath,
 } from "@/_api/editprofile";
 import notfound from "@/_assets/NOTFOUND.png";
-
-
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -49,13 +48,9 @@ interface MovieList {
 }
 
 function CustomTabPanel(props: TabPanelProps) {
-  
-
   const { children, value, index, ...other } = props;
 
   return (
-  
-
     <div
       role="tabpanel"
       hidden={value !== index}

@@ -109,7 +109,7 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // const data = await getNowPlaying();
+       
       setPlayingData({ data: mockplayingData, loading: false });
     };
     fetchData();
@@ -125,7 +125,7 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // const data = await getPopularMovies();
+
       setPopularData({ data: mockplayingData, loading: false });
     };
     fetchData();

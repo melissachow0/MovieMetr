@@ -131,3 +131,56 @@ export const mocktopratedData = [
 
   // Add more "Top Rated" movies here
 ];
+
+export const MovieLists = [
+  {
+    _id: "1",
+    name: "Top Sci-Fi Movies",
+    description: "A collection of the best science fiction movies of all time.",
+    entries: [
+      { itemType: "movie", item_id: "001", imageUrl: "@/_assets/films/popularfilms/arcadian.jpg" },
+      { itemType: "movie", item_id: "002", imageUrl: "@/_assets/films/popularfilms/arcadian.jpg" },
+      { itemType: "movie", item_id: "003", imageUrl: "@/_assets/films/popularfilms/arcadian.jpg" },
+    ],
+  },
+  {
+    _id: "2",
+    name: "Family Favorites",
+    description: "Movies the whole family can enjoy.",
+    entries: [
+      { itemType: "movie", item_id: "004", imageUrl: "@/_assets/films/popularfilms/arcadian.jpg" },
+      { itemType: "movie", item_id: "005", imageUrl: "@/_assets/films/popularfilms/arcadian.jpg" },
+      { itemType: "movie", item_id: "006", imageUrl: "@/_assets/films/popularfilms/arcadian.jpg" },
+    ],
+  },
+  {
+    _id: "3",
+    name: "Oscar Winners",
+    description: "Award-winning movies from the Oscars.",
+    entries: [
+      { itemType: "movie", item_id: "007", imageUrl: "@/_assets/films/popularfilms/arcadian.jpg" },
+      { itemType: "movie", item_id: "008", imageUrl: "@/_assets/films/popularfilms/arcadian.jpg" },
+      { itemType: "movie", item_id: "009" }, 
+    ],
+  },
+  {
+    _id: "4",
+    name: "Upcoming Releases",
+    description: "A list of movies scheduled to release soon.",
+    entries: [
+      { itemType: "movie", item_id: "010", imageUrl: "@/_assets/films/popularfilms/arcadian.jpg" },
+      { itemType: "movie", item_id: "011", imageUrl: "@/_assets/films/popularfilms/arcadian.jpg" },
+    ],
+  },
+  {
+    _id: "5",
+    name: "Classic Thrillers",
+    description: "Timeless thriller movies that keep you on the edge of your seat.",
+    entries: [
+      { itemType: "movie", item_id: "012", imageUrl: "@/_assets/films/popularfilms/arcadian.jpg" },
+      { itemType: "movie", item_id: "013", imageUrl: "@/_assets/films/popularfilms/arcadian.jpg" },
+      { itemType: "movie", item_id: "014", imageUrl: "@/_assets/films/popularfilms/arcadian.jpg" },
+    ],
+  },
+];
+
