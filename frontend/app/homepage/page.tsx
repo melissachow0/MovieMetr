@@ -2,12 +2,11 @@
 import React from "react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-//import { getPopularMovies } from "@/_api/getpopularmovies";
 import Image from "next/image";
 import { mockplayingData } from "@/_api/mockdata";
-//import { getTopRated } from "@/_api/gettopratedmovies";
+import { mockpopularData } from "@/_api/mockdata";
+import { mocktopratedData } from "@/_api/mockdata";
 import "./homepage.css";
-import Logo from "@/_assets/logo2.png";
 
 interface Movie {
   image: string;
@@ -86,7 +85,7 @@ const FeaturedContent: React.FC<FeaturedContentProps> = ({
   <div className="featured-content">
     <Image
       className="backdrop-image"
-      src={`https://image.tmdb.org/t/p/original${image}`}
+      src={`/_assets/films/popularfilms/${image}`}
       alt=""
       width={1400}
       height={1200}
@@ -175,7 +174,7 @@ const HomePage: React.FC = () => {
     <div>
       <div className="container">
         <div className="content-container">
-          {/* <FeaturedContent
+          <FeaturedContent
             image={mockplayingData[currentIndex].backdrop_path}
             title={mockplayingData[currentIndex].title}
             summary={mockplayingData[currentIndex].summary}
@@ -193,12 +192,12 @@ const HomePage: React.FC = () => {
             style={{ top: "350px", fontSize: "60px" }}
           >
             {">"}
-          </div> */}
+          </div>
           <MovieListContainer title="NEW RELEASES" movies={mockplayingData} />
-          <MovieListContainer title="POPULAR" movies={mockplayingData} />
+          <MovieListContainer title="POPULAR" movies={mockpopularData} />
           <MovieListContainer
             title="ALL TIME FAVORITES"
-            movies={mockplayingData}
+            movies={mocktopratedData}
           />
         </div>
       </div>
