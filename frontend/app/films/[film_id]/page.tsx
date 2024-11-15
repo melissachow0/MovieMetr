@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { getfilmdata } from "@/_api/getfilmdata";
 import MovieDetailPage from "@/_ui/components/MovieDetailPage/MovieDetailPage";
 import { MovieData } from "@/_api/types";
-import { useAuth } from "@/_context/authContext";
 import { getUserLists } from "@/_api/lists";
 import { getUser } from "@/_api/editprofile";
 import { getProfileFromToken } from "@/_api/profile";
@@ -31,7 +30,7 @@ export default function FilmDetailPage({
 
   const [userLists, setUserLists] = useState<MovieList[]>([]);
   const [user, setUser] = useState<User | null>(null);
-  const { token } = useAuth();
+
   const tokenData = localStorage.getItem("token");
 
   const fetchUser = async (userId: string) => {

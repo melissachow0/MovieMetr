@@ -5,8 +5,9 @@ import { useState } from "react";
 import Image from "next/image";
 import { Tabs, Tab, Box } from "@mui/material";
 import { SpeedDial, SpeedDialIcon, SpeedDialAction } from "@mui/material";
-import profilePic from "@/_assets/sample_profile_pic.png";
-import bannerPic from "@/_assets/sample_banner_pic.jpg";
+import profilePic from "../../public/_assets/sample_profile_pic.png"
+import bannerPic from "../../public/_assets/sample_banner_pic.jpg"
+
 import EditProfileModal from "@/_ui/components/EditProfile/EditProfile";
 import { getUserLists, getMovieInfo, addList, deleteList } from "@/_api/lists";
 import {
@@ -15,8 +16,8 @@ import {
   updateProfilePath,
 } from "@/_api/editprofile";
 import notfound from "@/_assets/NOTFOUND.png";
-import { getProfileFromToken } from "@/_api/profile";
-import isAuth from "@/protected/protectedRoute";
+
+
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -106,27 +107,6 @@ const Userpage = () => {
     setNewListName("");
   };
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const tokenData = localStorage.getItem("token");
-      if (tokenData) {
-        // This allows us to parse the token in a usable format
-        const tokenObject = JSON.parse(tokenData);
-        // Hit our profile route
-        getProfileFromToken(tokenObject.value.token)
-          // this allows us to unpack the promise we get from the profile route
-          .then((response) => {
-            // console.log(response.user.id);
-            console.log("HERE IS THE USER's ID : " + response.user.id); //come back to this
-            fetchUser(response.user.id); // Fetch user data on mount
-            fetchUserListsData(response.user.id);
-          })
-          .catch((error) => {
-            console.error("Error fetching user ID: ", error);
-          });
-      }
-    }
-  }, []);
 
   const actions = [
     {
@@ -417,4 +397,4 @@ const Userpage = () => {
   );
 };
 
-export default isAuth(Userpage);
+export default Userpage;

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useAuth } from "../_context/authContext";
+
 import Link from "next/link";
 import React from "react";
 import styles from "./Auth.module.css";
@@ -8,7 +8,7 @@ import styles from "./Auth.module.css";
 export default function LoginPage() {
   const [error, setError] = useState<string>("");
 
-  const { handleLogin } = useAuth();
+
 
   const [formData, setFormData] = useState({
     username: "",
@@ -31,7 +31,9 @@ export default function LoginPage() {
       password: "",
     });
     try {
-      await handleLogin(formData.username, formData.password);
+      // TO MOCK WE HAVE TO JUST FUDGE TO WORK
+
+
     } catch (error: any) {
       setError("Username and password don't match");
       return;
