@@ -1,9 +1,7 @@
 "use client";
-
 import styles from "../login/Auth.module.css";
 import Link from "next/link";
 import { useState } from "react";
-import { signUpUser } from "@/_api/signup";
 import { useRouter } from "next/navigation";
 
 export default function Signup() {
@@ -58,12 +56,7 @@ export default function Signup() {
 
     try {
       // Call the signUpUser function from signup.ts
-      await signUpUser(
-        formData.email,
-        formData.username,
-        formData.password,
-        formData.confirmPassword,
-      );
+      router.push("/login");
       // Clear form data or perform any additional actions as needed
       setFormData({
         email: "",
