@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getfilmdata } from "@/_api/getfilmdata";
+import { mockplayingData } from "@/_api/mockdata"; // Import mock data
 import MovieDetailPage from "@/_ui/components/MovieDetailPage/MovieDetailPage";
 import { MovieData } from "@/_api/types";
 import { getUserLists } from "@/_api/lists";
@@ -28,15 +28,13 @@ export default function FilmDetailPage({
     entries: { itemType: string; item_id: string; imageUrl?: string }[];
   }
 
-  const [userLists, setUserLists] = useState<MovieList[]>([]);
+  const [userLists, setUserLists] = useState<MovieList[]>([]); 
   const [user, setUser] = useState<User | null>(null);
-
   const tokenData = localStorage.getItem("token");
 
   const fetchUser = async (userId: string) => {
     try {
       const data = await getUser(userId);
-
       setUser(data);
     } catch (error) {
       console.error("Error fetching user data", error);
@@ -66,11 +64,9 @@ export default function FilmDetailPage({
     if (tokenData) {
       const tokenObject = JSON.parse(tokenData);
       getProfileFromToken(tokenObject.value.token)
-        // this allows us to unpack the promise we get from the profile route
         .then((response) => {
-          // console.log(response.user.id);
-          console.log("UserId in the movie page : " + response.user.id); //come back to this
-          fetchUser(response.user.id); // Fetch user data on mount
+          console.log("UserId in the movie page : " + response.user.id); 
+          fetchUser(response.user.id); 
           fetchUserListsData(response.user.id);
         })
         .catch((error) => {
@@ -78,16 +74,27 @@ export default function FilmDetailPage({
         });
     }
 
-    const fetchData = async () => {
-      try {
-        const data = await getfilmdata(params.film_id);
-        setFilmData({ data: data, loading: false, error: null });
-      } catch (error) {
-        let errorMessage = "An unknown error occurred";
-        if (error instanceof Error) {
-          errorMessage = error.message;
-        }
-        setFilmData({ data: null, loading: false, error: errorMessage });
+    // Use mock data instead of API call
+    const fetchData = () => {
+      const movie = mockplayingData.find((movie) => movie.id === parseInt(params.film_id));
+      if (movie) {
+        const movieData: MovieData = {
+          id: String(movie.id),
+          backdrop_path: movie.backdrop_path,
+          poster_path: movie.image,
+          title: movie.title,
+          release_date: "2024-07-26", // You can adjust this as per your mock data
+          runtime: 120, // Default runtime or mock value
+          genres: [], // Mock genres, or add if needed
+          tagline: "Mock Tagline", // You can adjust this as per your mock data
+          overview: movie.summary,
+          credits: {
+            cast: [], // Mock cast, or add if needed
+          },
+        };
+        setFilmData({ data: movieData, loading: false, error: null });
+      } else {
+        setFilmData({ data: null, loading: false, error: "Movie not found" });
       }
     };
 

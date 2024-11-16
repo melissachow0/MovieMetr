@@ -34,7 +34,7 @@ export default function MovieDetailPage({
         <div className={styles.backdrop}>
           <Image
             className={styles.image}
-            src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
+            src={`/_assets/films/popularfilms/${data.backdrop_path}`}
             alt={`backdrop for ${data.title}`}
             style={{
               margin: "auto",
@@ -55,7 +55,7 @@ export default function MovieDetailPage({
             priority
             src={
               data.poster_path
-                ? `https://image.tmdb.org/t/p/original${data.poster_path}`
+                ? `/_assets/films/popularfilms/${data.poster_path}`
                 : "/_assets/NOTFOUND.png"
             }
             width={255}
