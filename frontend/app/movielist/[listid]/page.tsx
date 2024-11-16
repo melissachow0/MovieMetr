@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { getListInfo, getMovieInfo } from "@/_api/lists";
 import Link from "next/link";
 import { updateList, deleteMovieFromList } from "@/_api/lists";
+import { mockplayingData, MovieLists } from "@/_api/mockdata";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
@@ -65,20 +66,20 @@ export default function MovieListPage({
     setShowFullDescription(!showFullDescription);
   };
 
-  const fetchData = useCallback(async () => {
-    const data = await getListInfo(params.listid);
-    const moviePromises = data.entries.map((entry: { item_id: string }) =>
-      getMovieInfo(entry.item_id),
-    );
-    const movieInfos = await Promise.all(moviePromises);
-    for (let i = 0; i < data.entries.length; i++) {
-      // movies load faster
-      data.entries[i].imageUrl =
-        `https://image.tmdb.org/t/p/original${movieInfos[i].image_path}`;
-      data.entries[i].name = movieInfos[i].title;
-      data.entries[i].id = movieInfos[i]._id;
+  const fetchData = useCallback(() => {
+    const data = MovieLists.find((list) => list._id === params.listid);
+    if (data) {
+      const movieInfos = data.entries.map((entry) => {
+        const movie = mockplayingData.find((movie) => movie.id === parseInt(entry.item_id));
+        return {
+          ...entry,
+          imageUrl: movie?.image,
+          name: movie?.title,
+          id: movie?.id,
+        };
+      });
+      setListData({ details: { ...data, entries: movieInfos }, loading: false });
     }
-    setListData({ details: data, loading: false });
   }, [params.listid]);
 
   useEffect(() => {
@@ -145,7 +146,7 @@ export default function MovieListPage({
                     <Image
                       width={200}
                       height={200}
-                      src={entry.imageUrl}
+                      src={`/_assets/films/popularfilms/${entry.imageUrl}`}
                       alt={entry.item_id}
                       className={styles.movieImage}
                     />

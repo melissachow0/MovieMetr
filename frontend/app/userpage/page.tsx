@@ -10,7 +10,6 @@ import bannerPic from "../../public/_assets/sample_banner_pic.jpg"
 import Review from "@/_ui/components/Review/Review";
 import { mockUser, MovieLists } from "@/_api/mockdata";
 import EditProfileModal from "@/_ui/components/EditProfile/EditProfile";
-import { deleteList } from "@/_api/lists";
 import {
   getUser,
   uploadProfilePicture,
@@ -21,7 +20,6 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Link from "next/link";
-import { Movie } from "@mui/icons-material";
 
 // interface for the user
 interface User {
@@ -191,7 +189,7 @@ const Userpage = () => {
     await deleteList(listId);
     refreshUserData();
   };
-  
+
   //profile pic upload
   const handleProfilePicClick = () => {
     fileInputRef.current?.click();
