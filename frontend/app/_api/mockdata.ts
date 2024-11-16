@@ -184,3 +184,10 @@ export const MovieLists = [
   },
 ];
 
+export const mockUser = {
+  _id: "mock_user_id",
+  username: "Movielover299",
+  email: "mockuser@example.com",
+  profilePath: "/_assets/sample_profile_pic.jpg",
+  bio: "You Could Not Live With Your Own Failure, And Where Did That Bring You? Back To Me - Thanos",
+};

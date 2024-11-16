@@ -9,6 +9,7 @@ import profilePic from "../../public/_assets/sample_profile_pic.png"
 import bannerPic from "../../public/_assets/sample_banner_pic.jpg"
 import Review from "@/_ui/components/Review/Review";
 import { MovieLists } from "@/_api/mockdata";
+import { mockUser } from "@/_api/mockdata";
 
 import EditProfileModal from "@/_ui/components/EditProfile/EditProfile";
 import { getUserLists, getMovieInfo, addList, deleteList } from "@/_api/lists";
@@ -77,7 +78,7 @@ function a11yProps(index: number) {
 
 const Userpage = () => {
   const [value, setValue] = useState(0);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(mockUser);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [userLists, setUserLists] = useState<MovieList[]>([]);
   const [isCreateListFormVisible, setIsCreateListFormVisible] = useState(false);
@@ -134,17 +135,19 @@ const Userpage = () => {
 
   const fetchUser = async (userId: string) => {
     try {
-      const data = await getUser(userId);
-      setUser(data);
+      // Simulate API delay with setTimeout (optional)
+      setTimeout(() => {
+        setUser(mockUser);
+      }, 500);
     } catch (error) {
-      console.error("Error fetching user data", error);
+      console.error("Error fetching mock user data", error);
     }
   };
 
   const refreshUserData = () => {
     if (user) {
       fetchUser(user._id);
-      fetchUserListsData(user._id);
+      //fetchUserListsData(user._id);
     }
   };
 
@@ -236,7 +239,7 @@ const Userpage = () => {
         <div className={styles.photoUsername}>
           <Image
             priority
-            src={user?.profilePath || profilePic}
+            src={profilePic}
             width={200}
             height={200}
             alt="Profile Picture"
