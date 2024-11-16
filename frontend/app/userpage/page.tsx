@@ -8,8 +8,7 @@ import { SpeedDial, SpeedDialIcon, SpeedDialAction } from "@mui/material";
 import profilePic from "../../public/_assets/sample_profile_pic.png"
 import bannerPic from "../../public/_assets/sample_banner_pic.jpg"
 import Review from "@/_ui/components/Review/Review";
-import { MovieLists } from "@/_api/mockdata";
-import { mockUser } from "@/_api/mockdata";
+import { mockUser, MovieLists } from "@/_api/mockdata";
 
 import EditProfileModal from "@/_ui/components/EditProfile/EditProfile";
 import { getUserLists, getMovieInfo, addList, deleteList } from "@/_api/lists";
@@ -80,7 +79,7 @@ const Userpage = () => {
   const [value, setValue] = useState(0);
   const [user, setUser] = useState<User | null>(mockUser);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
-  const [userLists, setUserLists] = useState<MovieList[]>([]);
+  const [userLists, setUserLists] = useState<MovieList[]>(MovieLists);
   const [isCreateListFormVisible, setIsCreateListFormVisible] = useState(false);
   const [newListName, setNewListName] = useState("");
   const [isListEditing, setIsListEditing] = useState(false);
@@ -145,10 +144,8 @@ const Userpage = () => {
   };
 
   const refreshUserData = () => {
-    if (user) {
-      fetchUser(user._id);
-      //fetchUserListsData(user._id);
-    }
+    setUser(mockUser);
+    setUserLists(MovieLists);
   };
 
   const openReviewModal = () => {
@@ -386,6 +383,7 @@ const Userpage = () => {
                           height: "75%",
                           objectFit: "cover",
                         }}
+                        //`/_assets/films/popularfilms/${entry.imageUrl}`
                       />
                     ) : (
                       entry.item_id
