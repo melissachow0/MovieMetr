@@ -9,9 +9,8 @@ import profilePic from "../../public/_assets/sample_profile_pic.png"
 import bannerPic from "../../public/_assets/sample_banner_pic.jpg"
 import Review from "@/_ui/components/Review/Review";
 import { mockUser, MovieLists } from "@/_api/mockdata";
-
 import EditProfileModal from "@/_ui/components/EditProfile/EditProfile";
-import { getUserLists, getMovieInfo, addList, deleteList } from "@/_api/lists";
+import { deleteList } from "@/_api/lists";
 import {
   getUser,
   uploadProfilePicture,
@@ -22,6 +21,7 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Link from "next/link";
+import { Movie } from "@mui/icons-material";
 
 // interface for the user
 interface User {
@@ -145,7 +145,7 @@ const Userpage = () => {
 
   const refreshUserData = () => {
     setUser(mockUser);
-    setUserLists(MovieLists);
+    setUserLists([...MovieLists]);
   };
 
   const openReviewModal = () => {
@@ -156,18 +156,21 @@ const Userpage = () => {
     setIsReviewModalOpen(false);
   };
 
-  const fetchUserListsData = async (userId: string) => {
-    try {
-      const lists = await getUserLists(userId);
-      for (let list of lists) {
-        for (let entry of list.entries) {
-          const movieInfo = await getMovieInfo(entry.item_id);
-          entry.imageUrl = `https://image.tmdb.org/t/p/original${movieInfo.image_path}`;
-        }
-      }
-      setUserLists(lists);
-    } catch (error) {
-      console.error("Error fetching user lists", error);
+  const addList = async (name: string, userId: string) => {
+    const newList = {
+      _id: (Math.random() * 1000).toFixed(0), // Generate a mock ID
+      name,
+      description: "",
+      entries: [],
+    };
+    MovieLists.push(newList);
+    return newList;
+  };
+
+  const deleteList = async (listId: string) => {
+    const index = MovieLists.findIndex((list) => list._id === listId);
+    if (index !== -1) {
+      MovieLists.splice(index, 1);
     }
   };
 
@@ -182,11 +185,13 @@ const Userpage = () => {
     setIsCreateListFormVisible(false);
     setNewListName("");
   };
+  
 
   const handleDeleteListClick = async (listId: string) => {
     await deleteList(listId);
     refreshUserData();
   };
+  
   //profile pic upload
   const handleProfilePicClick = () => {
     fileInputRef.current?.click();
@@ -409,8 +414,11 @@ const Userpage = () => {
               </div>
             </div>
           ))}
-        </div>
-        {isReviewModalOpen && (
+        </div> 
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={1}></CustomTabPanel>
+      <CustomTabPanel value={value} index={2}>
+      {isReviewModalOpen && (
             <div className={styles.modalOverlay}>
               <div className={styles.modalContent}>
                 <button
@@ -424,8 +432,6 @@ const Userpage = () => {
             </div>
           )}
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}></CustomTabPanel>
-      <CustomTabPanel value={value} index={2}></CustomTabPanel>
     </div>
   );
 };
