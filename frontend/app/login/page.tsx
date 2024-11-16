@@ -1,14 +1,15 @@
 "use client";
 import { useState } from "react";
-
 import Link from "next/link";
 import React from "react";
 import styles from "./Auth.module.css";
 
+import { useRouter } from 'next/navigation'
+
+
 export default function LoginPage() {
   const [error, setError] = useState<string>("");
-
-
+  const router = useRouter()
 
   const [formData, setFormData] = useState({
     username: "",
@@ -25,15 +26,16 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Clear form data or perform any additional actions as needed
+
     setFormData({
       username: "",
       password: "",
     });
+
     try {
-      // TO MOCK WE HAVE TO JUST FUDGE TO WORK
-
-
+      // Mock login validation (skipping real validation for this prototype)
+      // Regardless of input, redirect to the user page
+      router.push('/userpage')
     } catch (error: any) {
       setError("Username and password don't match");
       return;
@@ -95,3 +97,4 @@ export default function LoginPage() {
     </div>
   );
 }
+
