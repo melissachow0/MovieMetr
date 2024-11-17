@@ -60,7 +60,7 @@ export default function SideBar() {
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/feed">
             <div className={styles.icon}>
               <ExploreIcon></ExploreIcon>
             </div>

@@ -379,3 +379,78 @@ export const mockUser = {
   profilePath: "/_assets/sample_profile_pic.jpg",
   bio: "You Could Not Live With Your Own Failure, And Where Did That Bring You? Back To Me - Thanos",
 };
+
+export const Posts = [
+  {
+    id: 1,
+    avatar: "https://via.placeholder.com/50",
+    username: "John Doe",
+    handle: "@johndoe",
+    content: "This is my first post! Loving this platform.",
+  },
+  {
+    id: 2,
+    avatar: "https://via.placeholder.com/50",
+    username: "Jane Smith",
+    handle: "@janesmith",
+    content:
+      "Just finished a great book! Highly recommend it to anyone interested in science fiction.",
+  },
+  {
+    id: 3,
+    avatar: "https://via.placeholder.com/50",
+    username: "Tech Guru",
+    handle: "@techguru",
+    content: "Excited about the latest tech updates! Stay tuned for more.",
+  },
+  {
+    id: 4,
+    avatar: "https://via.placeholder.com/50",
+    username: "Traveler",
+    handle: "@traveler",
+    content: "Exploring the world one city at a time!",
+  },
+  {
+    id: 5,
+    avatar: "https://via.placeholder.com/50",
+    username: "Foodie",
+    handle: "@foodie",
+    content: "Check out this delicious dish I had today. 😋",
+  },
+  {
+    id: 6,
+    avatar: "https://via.placeholder.com/50",
+    username: "John Doe",
+    handle: "@johndoe",
+    content: "This is my first post! Loving this platform.",
+  },
+  {
+    id: 7,
+    avatar: "https://via.placeholder.com/50",
+    username: "Jane Smith",
+    handle: "@janesmith",
+    content:
+      "Just finished a great book! Highly recommend it to anyone interested in science fiction.",
+  },
+  {
+    id: 8,
+    avatar: "https://via.placeholder.com/50",
+    username: "Tech Guru",
+    handle: "@techguru",
+    content: "Excited about the latest tech updates! Stay tuned for more.",
+  },
+  {
+    id: 9,
+    avatar: "https://via.placeholder.com/50",
+    username: "Traveler",
+    handle: "@traveler",
+    content: "Exploring the world one city at a time!",
+  },
+  {
+    id: 10,
+    avatar: "https://via.placeholder.com/50",
+    username: "Foodie",
+    handle: "@foodie",
+    content: "Check out this delicious dish I had today. 😋",
+  },
+];
