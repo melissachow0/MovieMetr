@@ -32,7 +32,7 @@ export default function SearchResult({
           // use our own "not found" image if source is not found from TMDB
           src={
             data.image
-              ? `https://image.tmdb.org/t/p/original${data.image}`
+              ? `/_assets/films/popularfilms/${data.image}`
               : "_assets/NOTFOUND.png"
           }
           width={100.8}
@@ -46,12 +46,12 @@ export default function SearchResult({
               <h2 className={styles.title}>
                 {type === "films" ? data.title : data.name}
               </h2>
-              <h3 className={styles.alternateTitle}>
+              {/* <h3 className={styles.alternateTitle}>
                 {(type === "films" && data.original_title !== data.title) ||
                 (type === "shows" && data.original_name !== data.name)
                   ? ` \u2022 [${type === "films" ? data.original_title : data.original_name}]`
                   : ""}
-              </h3>
+              </h3> */}
             </div>
             {type === "films" || type === "shows" ? (
               <h3 className={styles.year}>

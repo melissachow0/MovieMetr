@@ -4,7 +4,6 @@ import { useState } from "react";
 import styles from "./Search.module.css";
 import Image from "next/image";
 import Dropdown from "../DropDown/Dropdown";
-import searchIcon from "@/_assets/search.svg";
 import { useRouter } from "next/navigation";
 
 export default function Search() {

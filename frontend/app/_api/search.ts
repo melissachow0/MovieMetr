@@ -1,7 +1,4 @@
-import { mockplayingData, mockpopularData, mocktopratedData } from './mockdata';
-
-// Combine all mock data into a single array
-const allMovies = [...mockplayingData, ...mockpopularData, ...mocktopratedData];
+import { mockwholeData } from "./mockdata";
 
 /**
  * Search movies based on type, name, and pagination.
@@ -15,7 +12,7 @@ export const search = async (type: string, name: string, pageNum: string) => {
   const itemsPerPage = 10; // Number of results per page
 
   // Filter data based on the query
-  const filteredResults = allMovies.filter((movie) =>
+  const filteredResults = mockwholeData.filter((movie) =>
     movie.title.toLowerCase().includes(name.toLowerCase())
   );
 
