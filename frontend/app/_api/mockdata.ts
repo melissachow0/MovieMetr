@@ -138,9 +138,9 @@ export const MovieLists = [
     name: "Top Sci-Fi Movies",
     description: "A collection of the best science fiction movies of all time.",
     entries: [
-      { itemType: "movie", item_id: "001", imageUrl: "/_assets/films/popularfilms/arcadian.jpg" },
-      { itemType: "movie", item_id: "002", imageUrl: "/_assets/films/popularfilms/despicableme4bd.jpg" },
-      { itemType: "movie", item_id: "003", imageUrl: "/_assets/films/popularfilms/deadpoolandwolverine.jpg" },
+      { itemType: "movie", item_id: "001", imageUrl: "/_assets/films/popularfilms/despicableme4bd.jpg" },
+      { itemType: "movie", item_id: "002", imageUrl: "/_assets/films/popularfilms/deadpoolandwolverinebd.jpg" },
+      { itemType: "movie", item_id: "003", imageUrl: "/_assets/films/popularfilms/gladiator2.jpg" },
     ],
   },
   {
@@ -149,8 +149,8 @@ export const MovieLists = [
     description: "Movies the whole family can enjoy.",
     entries: [
       { itemType: "movie", item_id: "004", imageUrl: "/_assets/films/popularfilms/thewildrobotbd.jpg" },
-      { itemType: "movie", item_id: "005", imageUrl: "/_assets/films/popularfilms/despicableme4bd.jpg" },
-      { itemType: "movie", item_id: "006", imageUrl: "/_assets/films/popularfilms/transformerone.jpg" },
+      { itemType: "movie", item_id: "005", imageUrl: "/_assets/films/popularfilms/transformerone.jpg" },
+      { itemType: "movie", item_id: "006", imageUrl: "/_assets/films/popularfilms/venom.jpg" },
     ],
   },
   {

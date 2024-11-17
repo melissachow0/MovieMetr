@@ -1,9 +1,7 @@
 "use client";
 import styles from "./movielist.module.css";
 import { useCallback, useEffect, useState } from "react";
-import { getListInfo, getMovieInfo } from "@/_api/lists";
 import Link from "next/link";
-import { updateList, deleteMovieFromList } from "@/_api/lists";
 import { mockplayingData, MovieLists } from "@/_api/mockdata";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
@@ -48,15 +46,18 @@ export default function MovieListPage({
     const finalName = newName !== "" ? newName : listData.details.name;
     const finalDescription =
       newDescription !== "" ? newDescription : listData.details.description;
-    await updateList(params.listid, finalName, finalDescription);
+
+    // Use the mock function to update the list
+    updateMockList(params.listid, finalName, finalDescription);
     setIsEditing(false);
+    fetchData();
   };
 
   const handleDeleteMovieClick = async (
     event: React.MouseEvent,
-    movieId: string,
+    movieId: string
   ) => {
-    await deleteMovieFromList(params.listid, movieId);
+    deleteMockMovieFromList(params.listid, movieId);
     event.stopPropagation();
     event.preventDefault();
     fetchData();
@@ -85,6 +86,30 @@ export default function MovieListPage({
   useEffect(() => {
     fetchData();
   }, [params.listid, fetchData]);
+
+  // Mock function to update the list data
+  const updateMockList = (listId: string, updatedName: string, updatedDescription: string) => {
+    const listIndex = MovieLists.findIndex(list => list._id === listId);
+    if (listIndex !== -1) {
+      MovieLists[listIndex] = {
+        ...MovieLists[listIndex],
+        name: updatedName,
+        description: updatedDescription,
+      };
+    } else {
+      console.error("List not found");
+    }
+  };
+
+  // Mock function to delete a movie from a list
+  const deleteMockMovieFromList = (listId: string, movieId: string) => {
+    const list = MovieLists.find((list) => list._id === listId);
+    if (list) {
+      list.entries = list.entries.filter((entry) => entry.item_id !== movieId);
+    } else {
+      console.error("List not found");
+    }
+  };
 
   return (
     <div className={styles.container}>
