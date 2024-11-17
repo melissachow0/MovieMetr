@@ -19,7 +19,6 @@ export default function Page({
     loading: true,
   });
   const [query, setQuery] = useState(params.name || ""); // State for search query
-
   const router = useRouter();
 
   // Fetch search data whenever the query or page changes
@@ -46,23 +45,15 @@ export default function Page({
     }
   }, [query, params.pageNum, params.type]);
 
-  // Handle search input changes
-  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setQuery(value); // Update the query state
-  };
-
-  // Handle the search submission
-  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (query.trim()) {
-      router.push(`/search/${params.type}/${query}/page/1`);
-    }
-  };
-
   // Handle pagination
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     router.push(`/search/${params.type}/${query}/page/${value}`);
+  };
+
+  // Use dynamic query updates
+  const handleQueryChange = (newQuery: string) => {
+    setQuery(newQuery);
+    router.push(`/search/${params.type}/${newQuery}/page/1`);
   };
 
   const theme = useTheme();
@@ -70,19 +61,7 @@ export default function Page({
 
   return (
     <div className={styles.wrapper}>
-      <form onSubmit={handleSearchSubmit} className={styles.searchForm}>
-        <input
-          type="text"
-          placeholder="Search..."
-          value={query}
-          onChange={handleSearchInputChange}
-          className={styles.searchInput}
-        />
-        <button type="submit" className={styles.searchButton}>
-          Search
-        </button>
-      </form>
-
+      {/* Render results and pagination */}
       {!searchData.loading && (
         <>
           <div className={styles.resultsInfoContainer}>
