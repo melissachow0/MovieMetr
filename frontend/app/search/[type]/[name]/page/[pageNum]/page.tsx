@@ -18,68 +18,75 @@ export default function Page({
     searchResultData: null,
     loading: true,
   });
+  const [query, setQuery] = useState(params.name || ""); // State for search query
 
-  // called whenever a search is made or a page is changed
+  const router = useRouter();
+
+  // Fetch search data whenever the query or page changes
   useEffect(() => {
-    /*
-      fetches search data for corresponding search category,
-      name and page number
-    */
     const fetchData = async () => {
       let type = params.type;
-      /* our API checks that the category is "movies", so if the
-       category is "films", we need to change it */
+
+      // Adjust "films" to "movies" for API compatibility
       if (params.type === "films") {
         type = "movies";
       }
-      const data = await search(type, params.name, params.pageNum);
+
+      const data = await search(type, query, params.pageNum);
       setSearchData({ searchResultData: data, loading: false });
-      console.log(data); // FOR  DEBUGGING
     };
-    // if the search category is valid, fetch data
-    if (
-      params.type === "films" ||
-      params.type === "shows" ||
-      params.type === "people"
-    ) {
+
+    if (["films", "shows", "people"].includes(params.type)) {
       fetchData();
     } else {
-      // otherwise, set the search data to an empty array
       setSearchData({
         searchResultData: { data: [], total_results: 0 },
         loading: false,
       });
     }
-  }, [params.name, params.pageNum, params.type]);
+  }, [query, params.pageNum, params.type]);
 
-  const router = useRouter();
-
-  /* 
-    since we are fetching data when params.pageNum changes, all
-    we need to do to render new data on page change is update the URL
-  */
-  const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    value: number,
-  ) => {
-    router.push(`/search/${params.type}/${params.name}/page/${value}`);
+  // Handle search input changes
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setQuery(value); // Update the query state
   };
 
-  /*
-    this is used to determine if we should use the medium or small pagination size
-    depending on the screen size
-  */
+  // Handle the search submission
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (query.trim()) {
+      router.push(`/search/${params.type}/${query}/page/1`);
+    }
+  };
+
+  // Handle pagination
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    router.push(`/search/${params.type}/${query}/page/${value}`);
+  };
+
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
     <div className={styles.wrapper}>
+      <form onSubmit={handleSearchSubmit} className={styles.searchForm}>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={query}
+          onChange={handleSearchInputChange}
+          className={styles.searchInput}
+        />
+        <button type="submit" className={styles.searchButton}>
+          Search
+        </button>
+      </form>
+
       {!searchData.loading && (
         <>
           <div className={styles.resultsInfoContainer}>
-            {params.type === "films" ||
-            params.type === "shows" ||
-            params.type === "people" ? (
+            {["films", "shows", "people"].includes(params.type) ? (
               <h2 className={styles.totalResults}>
                 {searchData.searchResultData.total_results} {params.type} found
                 for &quot;
@@ -99,7 +106,7 @@ export default function Page({
                   <SearchResult type={params.type} data={result} />
                   <hr className={styles.divider} />
                 </li>
-              ),
+              )
             )}
           </ul>
 
