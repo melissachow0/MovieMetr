@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactModal from "react-modal";
-import { getUserLists, addMovieToList } from "@/_api/lists";
+import { MovieLists } from "@/_api/mockdata"; // Import the mock data
 import styles from "./userlists.module.css";
 
 interface AddToListModalProps {
@@ -8,6 +8,7 @@ interface AddToListModalProps {
   onClose: () => void;
   userId: string;
   movieId: string;
+  movieTitle: string; // Added prop for confirmation message
 }
 
 const AddToListModal: React.FC<AddToListModalProps> = ({
@@ -15,26 +16,12 @@ const AddToListModal: React.FC<AddToListModalProps> = ({
   onClose,
   userId,
   movieId,
+  movieTitle,
 }) => {
-  const [userLists, setUserLists] = useState<{ _id: string; name: string }[]>(
-    [],
-  );
   const [selectedLists, setSelectedLists] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (userId) {
-      fetchUserListsData(userId);
-    }
-  }, [userId]);
-
-  const fetchUserListsData = async (userId: string) => {
-    try {
-      const lists = await getUserLists(userId);
-      setUserLists(lists);
-    } catch (error) {
-      console.error("Error fetching user lists:", (error as Error).message);
-    }
-  };
+  const [confirmationMessage, setConfirmationMessage] = useState<string | null>(
+    null
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
@@ -44,20 +31,29 @@ const AddToListModal: React.FC<AddToListModalProps> = ({
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      for (const listId of selectedLists) {
-        await addMovieToList(listId, movieId);
-      }
-      onClose();
-    } catch (error) {
-      console.error("Error adding movie to lists:", (error as Error).message);
+    if (selectedLists.length > 0) {
+      const listNames = selectedLists
+        .map(
+          (listId) =>
+            MovieLists.find((list) => list._id === listId)?.name || "Unknown"
+        )
+        .join(", ");
+      setConfirmationMessage(
+        `The movie "${movieTitle}" has been added to the following lists: ${listNames}.`
+      );
+      setTimeout(() => {
+        setConfirmationMessage(null); // Clear confirmation message
+        setSelectedLists([]); // Reset selection
+        onClose(); // Close modal
+      }, 3000); // Adjust delay as needed
     }
   };
 
   const handleClose = () => {
     setSelectedLists([]); // Uncheck all boxes
+    setConfirmationMessage(null); // Clear confirmation message
     onClose();
   };
 
@@ -77,33 +73,37 @@ const AddToListModal: React.FC<AddToListModalProps> = ({
       className={styles.modalOverlay}
     >
       <div className={styles.formContainer}>
-        <form onSubmit={handleSubmit}>
-          <label>Select lists:</label>
-          {userLists.map((list) => (
-            <div key={list._id} className={styles.checkboxContainer}>
-              <input
-                type="checkbox"
-                id={list._id}
-                value={list._id}
-                checked={selectedLists.includes(list._id)}
-                onChange={handleChange}
-              />
-              <label htmlFor={list._id}>{list.name}</label>
+        {confirmationMessage ? (
+          <div className={styles.confirmationMessage}>{confirmationMessage}</div>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <label>Select lists:</label>
+            {MovieLists.map((list) => (
+              <div key={list._id} className={styles.checkboxContainer}>
+                <input
+                  type="checkbox"
+                  id={list._id}
+                  value={list._id}
+                  checked={selectedLists.includes(list._id)}
+                  onChange={handleChange}
+                />
+                <label htmlFor={list._id}>{list.name}</label>
+              </div>
+            ))}
+            <div className={styles.BottomButtons}>
+              <button type="submit" className={styles.SaveButton}>
+                Save
+              </button>
+              <button
+                type="button"
+                onClick={handleClose}
+                className={styles.CancelButton}
+              >
+                Cancel
+              </button>
             </div>
-          ))}
-          <div className={styles.BottomButtons}>
-            <button type="submit" className={styles.SaveButton}>
-              Save
-            </button>
-            <button
-              type="button"
-              onClick={handleClose}
-              className={styles.CancelButton}
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
+          </form>
+        )}
       </div>
     </ReactModal>
   );

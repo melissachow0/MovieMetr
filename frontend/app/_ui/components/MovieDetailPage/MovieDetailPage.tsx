@@ -76,6 +76,7 @@ export default function MovieDetailPage({
             onClose={closeAddToListModal}
             userId={userId}
             movieId={data.id} // Pass the movie ID to the modal
+            movieTitle={data.title} 
           />
           <div className={styles.moviedetail}>
             <div className={styles.set}>

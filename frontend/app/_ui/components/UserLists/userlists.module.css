@@ -89,3 +89,11 @@
   margin-left: 10px;
   cursor: pointer;
 }
+
+.confirmationMessage {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
