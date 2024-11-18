@@ -68,11 +68,7 @@ const BasicStack: React.FC = () => {
         </div>
       )}
       <Typography variant="h4" className="feed-title">
-<<<<<<< HEAD
-        USER FEED
-=======
         {showSearchResults ? "Search Results" : "User Feed"}
->>>>>>> 6861f6140bc85a356f097ff76f0500953f67131c
       </Typography>
       {showSearchResults ? (
         // Search Results Screen
