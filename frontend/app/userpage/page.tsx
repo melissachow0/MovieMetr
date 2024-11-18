@@ -8,7 +8,7 @@ import { SpeedDial, SpeedDialIcon, SpeedDialAction } from "@mui/material";
 import profilePic from "../../public/_assets/sample_profile_pic.png"
 import bannerPic from "../../public/_assets/sample_banner_pic.jpg"
 import Review from "@/_ui/components/Review/Review";
-import { mockUser, MovieLists } from "@/_api/mockdata";
+import { mockUser, MovieLists, mockReviews} from "@/_api/mockdata";
 import EditProfileModal from "@/_ui/components/EditProfile/EditProfile";
 import {
   getUser,
@@ -416,20 +416,49 @@ const Userpage = () => {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}></CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-      {isReviewModalOpen && (
-            <div className={styles.modalOverlay}>
-              <div className={styles.modalContent}>
-                <button
-                  className={styles.closeButton}
-                  onClick={closeReviewModal}
-                >
-                  ×
-                </button>
-                <Review />
+  {isReviewModalOpen ? (
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalContent}>
+        <button className={styles.closeButton} onClick={closeReviewModal}>
+          ×
+        </button>
+        <Review />
+      </div>
+    </div>
+  ) : (
+    <div className={styles.reviewsSection}>
+      {mockReviews.length > 0 ? (
+        <div className={styles.reviewGrid}>
+          {mockReviews.map((review, index) => (
+            <div key={index} className={styles.reviewCard}>
+              <div className={styles.reviewImageWrapper}>
+                <Image
+                  src={review.movieImage}
+                  alt={review.movieTitle}
+                  width={150}
+                  height={200}
+                  className={styles.reviewImage}
+                />
+              </div>
+              <div className={styles.reviewContent}>
+                <h3 className={styles.reviewTitle}>{review.movieTitle}</h3>
+                <p className={styles.reviewText}>{review.review}</p>
+                <p className={styles.reviewRating}>
+                  <strong>Rating:</strong> {review.rating}/5
+                </p>
+                <p className={styles.reviewDate}>
+                  <strong>Date:</strong> {review.date}
+                </p>
               </div>
             </div>
-          )}
-      </CustomTabPanel>
+          ))}
+        </div>
+      ) : (
+        <p>No reviews yet. Be the first to review a movie!</p>
+      )}
+    </div>
+  )}
+</CustomTabPanel>
     </div>
   );
 };

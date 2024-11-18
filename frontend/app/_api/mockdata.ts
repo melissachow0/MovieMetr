@@ -488,3 +488,27 @@ export const mockProfiles = [
     avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
   },
 ];
+
+export const mockReviews = [
+  {
+    movieTitle: "Transformer One",
+    review: "Great movie! Loved the action scenes.",
+    rating: 5,
+    date: "2024-11-17",
+    movieImage: "/_assets/films/popularfilms/transformerone.jpg",
+  },
+  {
+    movieTitle: "Arcadian",
+    review: "A must-watch film for all sci-fi fans.",
+    rating: 5,
+    date: "2024-11-16",
+    movieImage: "/_assets/films/popularfilms/arcadian.jpg",
+  },
+  {
+    movieTitle: "Venom",
+    review: "Eddie and Venom make a great duo!",
+    rating: 4,
+    date: "2024-11-15",
+    movieImage: "/_assets/films/popularfilms/venom.jpg",
+  },
+];
