@@ -17,7 +17,7 @@ const BasicStack: React.FC = () => {
   return (
     <Box className="feed-container">
       <Typography variant="h4" className="feed-title">
-        User Feed
+        USER FEED
       </Typography>
       <div className="feed-scrollable">
         <Stack spacing={2}>
