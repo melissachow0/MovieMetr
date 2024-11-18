@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Tabs, Tab, Box, Button, Typography } from "@mui/material";
 import profilePic from "../../public/_assets/sample_profile_pic.png";
 import bannerPic from "../../public/_assets/sample_banner_pic.jpg";
-import { mockProfiles, MovieLists } from "@/_api/mockdata";
+import { mockProfiles, MovieLists, mockReviews } from "@/_api/mockdata";
 import styles from "../userpage/userpage.module.css"; // Reuse the same CSS file for consistency
 
 // Interface for Movie List
@@ -140,9 +140,7 @@ const StaticProfilePage: React.FC = () => {
                     <Typography variant="h6">{list.name}</Typography>
                   </div>
                   <div className={styles.listDescription}>
-                    <Typography>
-                      {list.entries.length} movies
-                    </Typography>
+                    <Typography>{list.entries.length} movies</Typography>
                     <Typography>
                       {list.description || "No description available"}
                     </Typography>
@@ -158,9 +156,37 @@ const StaticProfilePage: React.FC = () => {
           </Typography>
         )}
         {value === 2 && (
-          <Typography className={styles.tabContent}>
-            Ratings will be added soon.
-          </Typography>
+          <div className={styles.reviewsSection}>
+            {mockReviews.length > 0 ? (
+              <div className={styles.reviewGrid}>
+                {mockReviews.map((review, index) => (
+                  <div key={index} className={styles.reviewCard}>
+                    <div className={styles.reviewImageWrapper}>
+                      <Image
+                        src={review.movieImage}
+                        alt={review.movieTitle}
+                        width={150}
+                        height={200}
+                        className={styles.reviewImage}
+                      />
+                    </div>
+                    <div className={styles.reviewContent}>
+                      <h3 className={styles.reviewTitle}>{review.movieTitle}</h3>
+                      <p className={styles.reviewText}>{review.review}</p>
+                      <p className={styles.reviewRating}>
+                        <strong>Rating:</strong> {review.rating}/5
+                      </p>
+                      <p className={styles.reviewDate}>
+                        <strong>Date:</strong> {review.date}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <Typography>No reviews yet. Be the first to review a movie!</Typography>
+            )}
+          </div>
         )}
       </Box>
     </div>
