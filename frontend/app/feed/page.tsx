@@ -94,7 +94,7 @@ const BasicStack: React.FC = () => {
           <Stack spacing={2}>
             {filteredPosts.length > 0 ? (
               filteredPosts.map((post: Post) => (
-                <Link href='/profilepage/${post.id}' style={{cursor: "pointer"}}>
+                <Link href='/profilepage' style={{cursor: "pointer"}}>
                 <div key={post.id} className="feed-item">
                     <Avatar
                       src={post.avatar}
