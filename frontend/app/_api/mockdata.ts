@@ -266,7 +266,7 @@ export const mocktopratedData = [
 export const MovieLists = [
   {
     _id: "1",
-    name: "Top Sci-Fi Movies",
+    name: "Favorites",
     description: "A collection of the best science fiction movies of all time.",
     entries: [
       {
@@ -383,14 +383,14 @@ export const mockUser = {
 export const Posts = [
   {
     id: 1,
-    avatar: "https://via.placeholder.com/50",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
     username: "John Doe",
     handle: "@johndoe",
     content: "This is my first post! Loving this platform.",
   },
   {
     id: 2,
-    avatar: "https://via.placeholder.com/50",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
     username: "Jane Smith",
     handle: "@janesmith",
     content:
@@ -398,35 +398,35 @@ export const Posts = [
   },
   {
     id: 3,
-    avatar: "https://via.placeholder.com/50",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
     username: "Tech Guru",
     handle: "@techguru",
     content: "Excited about the latest tech updates! Stay tuned for more.",
   },
   {
     id: 4,
-    avatar: "https://via.placeholder.com/50",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
     username: "Traveler",
     handle: "@traveler",
     content: "Exploring the world one city at a time!",
   },
   {
     id: 5,
-    avatar: "https://via.placeholder.com/50",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
     username: "Foodie",
     handle: "@foodie",
     content: "Check out this delicious dish I had today. 😋",
   },
   {
     id: 6,
-    avatar: "https://via.placeholder.com/50",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
     username: "John Doe",
     handle: "@johndoe",
     content: "This is my first post! Loving this platform.",
   },
   {
     id: 7,
-    avatar: "https://via.placeholder.com/50",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
     username: "Jane Smith",
     handle: "@janesmith",
     content:
@@ -434,23 +434,57 @@ export const Posts = [
   },
   {
     id: 8,
-    avatar: "https://via.placeholder.com/50",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
     username: "Tech Guru",
     handle: "@techguru",
     content: "Excited about the latest tech updates! Stay tuned for more.",
   },
   {
     id: 9,
-    avatar: "https://via.placeholder.com/50",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
     username: "Traveler",
     handle: "@traveler",
     content: "Exploring the world one city at a time!",
   },
   {
     id: 10,
-    avatar: "https://via.placeholder.com/50",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
     username: "Foodie",
     handle: "@foodie",
     content: "Check out this delicious dish I had today. 😋",
+  },
+];
+
+
+export const mockProfiles = [
+  {
+    id: 1,
+    username: "johndoe",
+    bio: "Just a regular guy.",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
+  },
+  {
+    id: 2,
+    username: "janesmith",
+    bio: "Lover of books, movies, and all things creative.",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
+  },
+  {
+    id: 3,
+    username: "techguru",
+    bio: "Bringing you the latest tech news and updates.",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
+  },
+  {
+    id: 4,
+    username: "traveler",
+    bio: "Wanderlust at its finest.",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
+  },
+  {
+    id: 5,
+    username: "foodie",
+    bio: "Food is life.",
+    avatar: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg",
   },
 ];

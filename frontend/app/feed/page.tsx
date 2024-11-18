@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 import { Box, Stack, Avatar, Typography, TextField, Button } from "@mui/material";
 import { Posts } from "@/_api/mockdata";
@@ -21,6 +22,7 @@ interface UserProfilePreview{
 }
 
 const BasicStack: React.FC = () => {
+
   const [searchInput, setSearchInput] = React.useState("");
   const [showSearchResults, setShowSearchResults] = React.useState(false); // Tracks whether to display search results
   const [filteredPosts, setFilteredPosts] = React.useState<Post[]>([]); // Stores filtered posts based on search input
@@ -31,7 +33,16 @@ const BasicStack: React.FC = () => {
       const results = Posts.filter((post) =>
         post.username.toLowerCase().includes(searchInput.toLowerCase())
       );
-      setFilteredPosts(results);
+      const uniqueResults = Array.from(
+        new Map(results.map((post) => [post.username, post])).values()
+      );
+      // Transform content to empty string so posts appear as user profiles
+      const transformedResults = uniqueResults.map((post) => ({
+        ...post,
+        content: "",
+      }));
+
+      setFilteredPosts(transformedResults);
       setShowSearchResults(true);
     }
   };
@@ -83,20 +94,23 @@ const BasicStack: React.FC = () => {
           <Stack spacing={2}>
             {filteredPosts.length > 0 ? (
               filteredPosts.map((post: Post) => (
+                <Link href='/profilepage/${post.id}' style={{cursor: "pointer"}}>
                 <div key={post.id} className="feed-item">
-                  <Avatar
-                    src={post.avatar}
-                    alt={post.username}
-                    className="feed-avatar"
-                  />
-                  <div className="feed-content">
-                    <Typography className="feed-username">
-                      {post.username}{" "}
-                      <span className="feed-handle">{post.handle}</span>
-                    </Typography>
-                    <Typography className="feed-text">{post.content}</Typography>
-                  </div>
+                    <Avatar
+                      src={post.avatar}
+                      alt={post.username}
+                      className="feed-avatar"
+                    />
+                    <div className="feed-content">
+                      <a>asfd</a>
+                      <Typography className="feed-username">
+                        {post.username}{" "}
+                        <span className="feed-handle">{post.handle}</span>
+                      </Typography>
+                      <Typography className="feed-text">{post.content}</Typography>
+                    </div>
                 </div>
+                </Link>
               ))
             ) : (
               <Typography>No results found for "{searchInput}"</Typography>
@@ -109,12 +123,13 @@ const BasicStack: React.FC = () => {
         <div className="feed-scrollable">
           <Stack spacing={2}>
             {Posts.map((post: Post) => (
+              <Link href='/profilepage' style={{cursor: "pointer"}}>
               <div key={post.id} className="feed-item">
-                <Avatar
-                  src={post.avatar}
-                  alt={post.username}
-                  className="feed-avatar"
-                />
+                  <Avatar
+                    src={post.avatar}
+                    alt={post.username}
+                    className="feed-avatar"
+                  />
                 <div className="feed-content">
                   <Typography className="feed-username">
                     {post.username}{" "}
@@ -123,6 +138,7 @@ const BasicStack: React.FC = () => {
                   <Typography className="feed-text">{post.content}</Typography>
                 </div>
               </div>
+              </Link>
             ))}
           </Stack>
         </div>
